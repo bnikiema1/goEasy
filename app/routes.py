@@ -1,5 +1,7 @@
 from . import app
-from flask import render_template, redirect, flash, request
+from.extensions import db
+from .models import User
+from flask import render_template, redirect, flash, request, url_for
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -7,8 +9,20 @@ def login():
         print(request.form)
     return render_template('login.html', title='Login')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    
+    if request.method == 'POST':
+        print(request.form)
+        if request.form['password'] == request.form['confirmed']:
+            user = User(username= request.form['username'], email=request.form['email'])
+            user.pass_hash(request.form['password'])
+            db.session.add(user)
+            db.session.commit()
+            print(f' Account created for {user.username}')
+            return redirect(url_for('login'))
+        else:
+            print('passwords dont match')
+            return redirect(url_for('signup'))
+            
     return render_template('signup.html', title='Registration')
 
