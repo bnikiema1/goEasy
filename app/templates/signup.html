@@ -5,6 +5,26 @@
 <h1>Create Account</h1>
 
 <form action="" method="post">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+    <label for="name">Name</label><br>
+    <input type="text" name="name" id=""><br>
+
+    <label for="username">Username</label><br>
+    <input type="text", name="username"><br>
+
+    <label for="email">Email</label>
+    <input type="email" name="Email" id=""><br>
+
+    <label for="password">Password</label><br>
+    <input type="password" name="password" id=""><br>
+
+    <label for="confirm">Confirm Password</label>
+    <input type="password" name="Confrimed" id=""><br>
+
+    <button type="submit">Sign up</button>
+    <a href="#">Already have an account? login</a>
+
 
 </form>
 
