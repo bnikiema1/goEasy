@@ -4,6 +4,20 @@ from .models import User
 from flask import render_template, redirect, flash, request, url_for
 from flask_login import login_required, current_user, logout_user, login_user
 
+def valid_username(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return False
+    else:
+        return True
+    
+def valid_email(email):
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return False
+    else:
+        return True
+    
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -20,7 +34,12 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        print(request.form)
+        if not valid_username(request.form['username']):
+            print('Username is taken ')
+            return redirect(url_for('signup'))
+        if not valid_email(request.form['email']):
+            print('Email is taken ')
+            return redirect(url_for('signup'))
         if request.form['password'] == request.form['confirmed']:
             user = User(username= request.form['username'], email=request.form['email'])
             user.pass_hash(request.form['password'])
