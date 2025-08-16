@@ -6,7 +6,13 @@ from flask import render_template, redirect, flash, request, url_for
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print(request.form)
+        user = User.query.filter_by(username=request.form['username']).first()
+        if user != None:
+            if user.check_hash(request.form['password']):
+                return redirect(url_for('dashboard'))
+        else:
+            print("incorrect username or password")
+            return redirect(url_for('login'))
     return render_template('login.html', title='Login')
 
 @app.route('/signup', methods=['GET', 'POST'])
