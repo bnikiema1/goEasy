@@ -4,6 +4,8 @@
 <h1>Login</h1><hr>
 
 <form action="" method="post">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    
     <label for="username">Username</label><br>
     <input type="text" name="username" id=""><br>
 
