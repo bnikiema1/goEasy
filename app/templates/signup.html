@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Create Account</h1><hr>
+
+<form action="" method="post">
+    
+    <label for="name">Name</label><br>
+    <input type="text" name="name" id=""><br>
+
+    <label for="username">Username</label><br>
+    <input type="text", name="username"><br>
+
+    <label for="email">Email</label><br>
+    <input type="email" name="Email" id=""><br>
+
+    <label for="password">Password</label><br>
+    <input type="password" name="password" id=""><br>
+
+    <label for="confirm">Confirm Password</label><br>
+    <input type="password" name="Confrimed" id=""><br>
+
+    <button type="submit">Sign up</button><br>
+    <a href="#">Already have an account? login</a>
+
+
+</form>
+
+{% endblock %}

@@ -1,5 +1,14 @@
 from . import app
+from flask import render_template, redirect, flash, request
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def login():
-    return 'Login'
+    if request.method == 'POST':
+        print(request.form)
+    return render_template('login.html', title='Login')
+
+@app.route('/signup')
+def signup():
+    
+    return render_template('signup.html', title='Registration')
+
